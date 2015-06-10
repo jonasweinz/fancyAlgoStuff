@@ -1,0 +1,63 @@
+% header
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{ngerman}
+\usepackage{gensymb}
+
+% the document
+\begin{document}
+
+% create the title
+\title{Algo II Klausuraufgaben\\
+\small{Algorithmen auf Graphen}}
+\author{Tom Kneiphof}
+\date{\today}
+\maketitle
+
+\section*{Aufgabe 1}
+
+\paragraph{a)}
+Ein Matching $M \subseteq E$ eines ungerichteten Graphens $G = (V, E)$ ist eine Teilmenge der Kanten, so dass kein Knoten an zwei Kanten beteiligt ist.
+\begin{equation*}
+\forall \{v,w\}, \{x, y\} \in M \subseteq E : \{v, w\} \cap \{x, y\} = \emptyset
+\end{equation*}
+
+
+\paragraph{b)}
+Bei einem \textbf{Nicht erweiterbaren Matching} handelt es sich um ein Matching $M$, zu dem keine Kante aus $E$ hinzugenommen werden kann, so dass es ein Matching bleibt.
+\begin{equation*}
+\forall \{v, w\} \in E \setminus M : M \cup \{ \; \{v, w\} \; \} \; \textnormal{ist kein Matching}
+\end{equation*}
+
+Bei einem \textbf{Maximales Matching} handelt es sich um ein Matching $M_{max}$ maximaler Gr\"o{\ss}e.
+Es gibt also kein Matching welches mehr Kanten enth\"alt als $M_{max}$. Es gilt:
+\begin{equation*}
+\forall M : | M | \leq | M_{max} |
+\end{equation*}
+
+
+\paragraph{c)}
+Satz von Berge: Ein Matching $M$ ist genau dann maximal, falls es keinen $M$-augmentierenden Pfad gibt.
+
+\paragraph{d)}
+Beweis des Satzes von Berge:
+
+\paragraph{$\Rightarrow$}
+Annahme: Es existiert ein $M$-augmentierender Pfad $P$.
+Definiere $M' := M \oplus P$. Dann gilt $|M'| > |M|$, da $n$ Kanten entfernt wurden und $n+1$ Kanten hinzugef\"ugt wurden.
+Dies ist ein Widerspruch dazu, dass $M$ bereits ein Maximales Matching war.
+
+\paragraph{$\Leftarrow$}
+Sei $M$ ein Matching in $G$, und existiere kein $M$-augmentierender Pfad. Sei weiter $M_{max}$ ein beliebiges maximales Matching in $G$. Annahme: $|M| < |M_{max}|$.
+Betrachte $G' := (V, M \oplus M_{max})$. Da aus beiden Matchings je h\"ochstens eine Kante inzident zu $v$ sein kann, gilt:
+\begin{equation*}
+\forall v \in V : deg_{G'}(v) \leq 2
+\end{equation*}
+Die Zusammenhangskomponenten von $G'$ sind also isolierte Knoten, Kreise gerader L\"ange mit abwechselnden Kanten aus $M$ und $M_{max}$ oder Pfade mit abwechselnden Kanten aus $M$ und $M_{max}$.
+Da $|M| < |M_{max}|$ angenommen wurde, gibt es einen $M$-augmentierenden Pfad $P$ in $G'$, dessen Endknoten beide $M$-frei sind. Da $P$ auch in $G$ existiert, gibt es einen $M$-augmentierenden Pfad in $G$, was ein Widerspruch dazu ist, dass ein solcher Pfad nicht existiert.
+
+\end{document}
