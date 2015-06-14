@@ -67,7 +67,7 @@ Gegeben sei ein Bipartiter Graph $G = (A, B, E)$ sowie ein Matching $M$ auf $G$.
 \begin{equation*}
 A' := A \cup \{s\}  \qquad B':=B \cup \{t\} \qquad s,t \notin A \cup B \qquad s \neq t
 \end{equation*}
-Die Kanten die im Matching sind, werden von $A$ nach $B$ gerichtet und die Katen die nicht im Matching sind von $B$ nach $A$ gerichtet. Von $s$ aus sind die Kanten erreichbar die in $B$ $M$-frei sind, und von $M$-freien Knoten in $A$ ist $t$ erreichbar.
+Die Kanten die im Matching sind, werden von $A$ nach $B$ gerichtet und die Katen die nicht im Matching sind von $B$ nach $A$ gerichtet. Von $s$ aus sind die Knoten erreichbar die in $B$ $M$-frei sind, und von $M$-freien Knoten in $A$ aus ist $t$ erreichbar.
 \begin{equation*}
 E_1 := \{ \, (u, v) \mid (u, v) \in M, u \in A, v \in B \, \} \\
 \end{equation*}
@@ -84,6 +84,12 @@ Nun existiert in $G_M$ genau dann ein Pfad von $s$ nach $t$, wenn ein $M$-augmen
 \paragraph{Beweis}
 
 \paragraph{$\Rightarrow$}
+Sei $P = s, v_0, \ldots, v_k, t$ ein Pfad von $s$ nach $t$ in $G_M$.
+Daraus folgt direkt, dass $v_0 \in B$ $M$-frei ist, sowie $v_k \in A$ $M$-frei.
+Aus der Konstruktion von $E'$ folgt, dass die Kanten $(v_i, v_{i+1})$ abwechselnd aus $M$ und $E \setminus M$ kommen.
+Also ist $v_0, \ldots, v_k$ ein $M$-augmentierender Pfad in $G$.
+
+\paragraph{$\Leftarrow$}
 Sei $P = v_0, \ldots, v_k$ ein $M$-augmentierender Pfad in $G$. O.B.d.A. seien $v_0 \in B$ und $v_k \in A$.
 \begin{enumerate}
 	\item $(s, v_0) \in E'$ da $v_0$ $M$-frei ist, und $v_0 \in B$
@@ -91,17 +97,23 @@ Sei $P = v_0, \ldots, v_k$ ein $M$-augmentierender Pfad in $G$. O.B.d.A. seien $
 	\item $v_i \in A$ falls $i$ ungerade
 	\item $v_i \in B$ falls $i$ gerade
 	\item $\{v_i, v_{i+1}\} \in M$ falls $i$ ungerade
-	\item $\{v_i, v_{i+1}\} \in E\setminusM$ falls $i$ gerade
+	\item $\{v_i, v_{i+1}\} \in E \setminus M$ falls $i$ gerade
 \end{enumerate}
-
-	Es existiert also eine Kante $(s, v_0) \in E'$ und $(v_k, t) \in E'$.
-
-
-\paragraph{$\Leftarrow$}
+Es existiert also eine Kante $(s, v_0) \in E'$ und $(v_k, t) \in E'$,
+sowie die Kanten $(v_i, v_{i+1}) \in E'$.
+Damit ist $P' = s, v_0, \ldots, v_k, t $ ein Pfad von $s$ nach $t$ in $G_M$.
 
 
 \section*{Aufgabe 3}
 % Zeige O(V*(V+E))
-
+Betrachte den in Aufgabe 2 konstruierten Graphen $G_M$.
+Die Konstruktion von $G_M$ ist in $O(|V|*(|V|+|E|))$ realisierbar.
+$A'$ und $B'$ werden in konstanter Zeit konstruiert (ggf $O(\log|V|)$, je nach Datenstruktur).
+$E'$ wird in $O(|V|*|E|)$ konstruiert, da f\"ur jede Kante in $E$ noch gepr\"uft werden muss, ob sie in $M$ liegt.
+Eine Tiefensuche auf $G_M$ dauert $O(|V|+|E|)$.
+Der gefundene Pfad hat h\"ochstens L\"ange $O(|V|)$, jede Kante kann h\"ochstens $O(\log(|V|)^2) = O(|V|)$ eingef\"ugt oder entfernt werden, falls die Kanten in Form von Nachbarschaftslisten gespeichert sind (Adjazenzmatrizen sind da irgendwo in $O(1)$).
+\begin{equation*}
+O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
+\end{equation*}
 
 \end{document}
