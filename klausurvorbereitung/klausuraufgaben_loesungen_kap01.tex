@@ -301,9 +301,32 @@ if __name__ == "__main__":
 
 
 \section*{Aufgabe 06}
-    TODO (just a long threeliner ...)\\
-    Bespiel für Heuristik: setze beimBacktracking bevorzugt die
-    Variable um, die bisher am wenigsten enutzt wurde
+    3-SAT liegt in KNF vor, das bedeutet jede Klausel 
+    besteht aus ein bis drei Variablen. Damit die KNF. 
+    erfüllt ist muss jede dieser Klauseln erfüllt sein. 
+    Das bedeutet, dass jede Klausel mindestens eine Variable 
+    hat die durch ihre belegung den Wert wahr annimmt $\rightarrow$
+    Klauseln mit geringerer Anzahl von freien Variablen, die 
+    noch nicht erfüllt sind haben eine höhere Wahrscheinlichkeit 
+    entscheidende Belegungen zu sein. Zudem bedeutet das für
+    Klauseln die schon erfüllt sind, dass die weitere Belegung 
+    ihrer Variablen nicht relevant ist.
+    Daraus ergibt sich folgender Algorithmus: \\
+    
+    \begin{tabbing}
+\quad\=\quad\=\quad\=\quad\=\\
+FülleSAT(Formel, Belegung) \\
+\>    neueFormel=betrachte noch nicht erfüllten Klauseln \\
+\>\>        sortiere Klauseln der “neueFormel” aufsteigend nach Anzahl der noch nicht \\ 
+\>\>        belegten Variablen \\
+\>\>        gehe über alle freien Variablen und belege diese\\
+\>\>\>            ist Formel nicht falsche\\
+\>\>\>\>                rufe Fülle-SAT mit neuer Belegung auf\\
+\>\>\>            nehme Belegung zurück\\
+    \end{tabbing}
+
+    
+
     
 \section*{Aufgabe 07}
     \begin{enumerate}[label={\alph*)}]
@@ -366,8 +389,8 @@ if __name__ == "__main__":
     und RS als die Endseite der Br\"ucke.
     Ein Knoten hat als Attribute die Mengen L (mit den Personen auf der
     linken Seite) und R (mit den Personen auf der Rechten Seite).
-    Zudem definieren wir den Startzustand so, dass die schellste Person
-    zu beginn auf der Seite RS mit der Taschenlampe steht (das erspart
+    Zudem definieren wir den Startzustand so, dass die schnellste Person
+    zu Beginn auf der Seite RS mit der Taschenlampe steht (das erspart
     uns eine Fallunterscheidung)
     und die Iterationstiefe i. Ein Iterationsschritt (= einer Kante von einem
     Knoten v nach v') besteht aus zwei Schritten:
