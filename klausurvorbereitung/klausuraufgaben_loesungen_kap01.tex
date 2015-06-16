@@ -352,6 +352,41 @@ if __name__ == "__main__":
                     \end{itemize}
 
             \end{itemize}
+            
+            Aus Symmetrie und Dreiecksungleichung folgt: $E = V \times V
+            \setminus \{ (i,i) | i \in V \} $
+            
+            gesucht ist:
+            \begin{itemize}
+                \item kürzeste Rundreise $\Leftrightarrow$ 
+                    Permutation $\pi$ von $\left\{0,1,\ldots, n-1\right\}$ die
+                    $$
+                        \sum_{i=0}^{n-1} c(\pi(i), \pi(i+1 \mod n))
+                    $$
+                    minimiert.
+            \end{itemize}
+        
+        \item Algorithmus ``$APPROX \Delta HR$'' aus der Vorlesung (Seite 253):
+            \begin{itemize}
+                \item \textbf{Eingabe:} Graph wie in \textbf{a)} beschrieben
+                \item \textbf{Ausgabe:} Rundreise R mit $c(R) \leq 2 \cdot Cost_{opt}$
+                \item \textbf{Algo in Textueller Beschreibung:} \\
+                    \begin{itemize}
+                        \item Konstruiere minimalen überspannenden Baum T(V,A)
+                        \item Starte in Wurzel von T und besuche mittels Tiefensuche
+                            auf T alle Knoten in V.
+                        \item Schreibe die Knoten in der Reiehenfolge auf, in der
+                            sie oberster Knoten im Tiefensuche-Keller sind. Dies
+                            ergibt eine Knotenfolge $v_0,\ldots,v_i,\ldots,
+                            v_{j-1},v_j,v_{j+1},\ldots,v_{2(n-1)-1} = v_0$.
+                        \item Streiche $v_j$ genau dann aus der Knotenfolge, wenn
+                        $ j < 2(n-1) + 1 $ und $ i < j $ mit $ v_i = v_j$ existiert.
+                        \item gib resultierende Knotenfolge aus.
+                    \end{itemize}
+
+            \end{itemize}
+
+
 
             
     \end{enumerate}
