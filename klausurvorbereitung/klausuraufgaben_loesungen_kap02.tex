@@ -7,6 +7,11 @@
 \usepackage{amsmath}
 \usepackage{ngerman}
 \usepackage{gensymb}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+
+%Das brauchen wir:
+\newcommand{\zz}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
 
 % the document
 \begin{document}
@@ -116,4 +121,36 @@ Der gefundene Pfad hat h\"ochstens L\"ange $O(|V|)$, jede Kante kann h\"ochstens
 O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 \end{equation*}
 
+\section*{Aufgabe 4}
+
+    \begin{enumerate}[label={\alph*)}]
+        \item Ein gültiges Matching ist eine Menge $M \subseteq E$ wenn keine
+            zwei unterschiedliche Elemente aus $M$ einen gemeinsamen Knoten
+            haben.
+            Ein Matching $M'$ heißt nicht erweiterbar, wenn es keine Kante
+            $ e \in E \setminus M$ gibt, sodass $\{e\} \cup M$ ein gültiges
+            Matching ist.
+        \item
+            TODO: ``Pseudocode Carsten...''
+        \item
+            $\zz$: $M$ ist nicht erweiterbares Matching $\Rightarrow
+            |M| \geq \frac{1}{2}|M_{max}|$
+            \\
+            \textbf{Annahme:} $M$ ist nicht erweiterbares Matching und 
+            $|M| < \frac{1}{2}|M_{max}|$
+            \\ 
+            Dann muss es aber eine Kante $m_0 \in M_{max}$ geben für
+            die gilt: $m_0 \notin M$ und die Kante Verbindet zwei Knoten,
+            die von keiner Kante in $M$ überdeckt werden
+            \\
+            $\Rightarrow M$ kann um $m_0$ erweitert werden
+            \\
+            $\Rightarrow M$ ist nicht ein nicht erweiterbares Matching
+            $\lightning$ Widerspruch!            
+        \item
+            
+            
+    \end{enumerate}
+
+    
 \end{document}
