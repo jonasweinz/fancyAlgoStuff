@@ -91,8 +91,16 @@ emphstyle={\color{self}\slshape},
     \begin{enumerate}[label={\alph*)}]
         \item
             \begin{itemize}
-                \item Aufz\"ahlbaum: Ein Baum der alle L\"osungen
-                    enth\"alt (?)
+                \item Aufz\"ahlbaum: Ein Aufzählbaum T besteht aus:
+                \begin{itemize}
+                    \item Wurzel = gesamter Lösungsraum
+                    \item An jeder Kante stehen Restriktionen.
+                    \item Knoten $j = \text{Teillösungsraum} S_j
+                        $ ,sodass die Kandidaten sämtlicher
+                        Restriktionen auf dem Pfad von der Wurzel
+                        bis Knoten $S_j $ erfüllen. 
+                \end{itemize}
+
                 \item Aufz\"ahlungsmethoden: \\
                     \begin{itemize}
                         \item Entscheidungsproblem: 
