@@ -83,7 +83,7 @@ emphstyle={\color{self}\slshape},
 % create the title
 \title{Klausuraufgaben \\
 \small{Kapitel 7 - Entwurf von Algorithmen}}
-\author{The mad physicist}
+\author{}
 \date{\today}
 \maketitle
 
@@ -448,10 +448,41 @@ if __name__ == "__main__":
 
     
 \section*{Aufgabe 10}
-    TODO
+    Las-Vegas und Monte-Carlo Algorithmen sind beide 
+    probabilistische Algorithmen. Algorithmen die Zufallszahlen 
+    bzw. Zufallsentscheidungen verwenden, heißen probabilistisch 
+    oder auch randomisiert. Las-Vegas Algorithmen liefern stets 
+    eine korrekte Lösung, hingenen liefern Monte-Carlo Algorithmen 
+    manchmal inkorrekte Lösung, deren Wahrscheinlichkeit aber sehr klein ist
     
 \section*{Aufgabe 11}
-    TODO
+    \begin{enumerate}[label={\alph*)}]
+        \item
+         Die Implementierung für randomisiertes Quicksort 
+         unterscheidet sich von Quicksort aus Algo 1 durch die 
+         Auswahl des Pivotelements. Dieses wird durch die Auswahl 
+         einer Zufälligen Array-Stelle, der zu betrachtenen bestimmt.
+         \item
+          Im worst-case ist in jedem Rekursionsschritt das Pivotelement 
+          das o.B.d.A. größte, s.d. ein Array in ein $(n-1)$-elementiges 
+          im nächsten Rekursionsschritt wird. In einem Rekursionsschritt 
+          müssen alle elemente verglichen werden $\Rightarrow$ $O(n)$ dadurch dass immer 
+          nur es ein element weniger gibt wird es $O(n)$ Rekursionsschritte 
+          geben.
+          \\$\Rightarrow$ $O(n)\cdot O(n) = O(n^2)$
+        \item
+        \begin{itemize}
+            \item $[123456] \looparrowright p=6$
+            \item $[12345] [6] \looparrowright p=5$
+            \item $[[1234] [5]] [6] \looparrowright p=4$
+            \item $[[[123] [4]] [5]] [6] \looparrowright P=3$
+            \item $[[[[12] [3]] [4]] [5]] [6] \looparrowright p=2$
+            \item $[[[[[1] [2]] [3]] [4]] [5]] [6]$
+        \end{itemize}
+        \item TODO
+           
+    \end{enumerate}
+
     
 \section*{Aufgabe 12}
     TODO
