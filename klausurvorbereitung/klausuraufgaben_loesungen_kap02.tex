@@ -9,6 +9,8 @@
 \usepackage{gensymb}
 \usepackage{enumitem}
 \usepackage{stmaryrd}
+\usepackage{listings}
+
 
 %Das brauchen wir:
 \newcommand{\zz}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
@@ -230,5 +232,26 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 	Da $T$ bereits ein minimaler überspannender Baum war, muss $w(T') = w(T)$ sein und $T'$ ist ein minimaler überspannender Baum.
 	$(x, y) \notin \tilde{A}$, da $\tilde{A}$ den Schnitt $(S, V \setminus S)$ respektiert, $(x, y)$ diesen aber kreuzt.
 	Also ist $\tilde{A} \subseteq A'$. $(u, v)$ sicher bzgl. $\tilde{A}$.
+
+\section*{Aufgabe 22}
+	\paragraph{Eingabe:} Ungerichteter, gewichteter Graph $G=(V, E, w)$
+	\paragraph{Ausgabe:} Minimaler $G$ überspannender Spannwald $T=(V, A, w)$
+	\begin{lstlisting}[language=Java]
+A = new Set();
+Q = new Array(E);
+sort(Q, incr by w);
+UF = makeUnionFind(V);
+for ((u, v) in Q)
+{
+	idU = UF.find(u);
+	idV = UF.find(v);
+	if (idU != idV)
+	{
+		UF.union(idU, idV);
+		A.insert((u, v));
+	}
+}
+return T = (V, A, w);
+	\end{lstlisting}
 
 \end{document}
