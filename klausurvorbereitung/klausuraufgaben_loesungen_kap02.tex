@@ -201,8 +201,9 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
         Gegeben $G = (V, E, w)$ und einen (Quell-)Knoten $s \in V$ , soll für jeden Knoten $v \in V$
         ein kürzester Pfad von $s$ zu $v$ gefunden werden.
         \item Alle-Paare-kürzeste-Weg-Problem (all-pairs shortest-path problem): Hier möchte
-man, gegeben $G = (V, E, w)$, für jedes Paar $u,v \in V$, einen kürzesten Pfad von u nach v
-finden.
+		man, gegeben $G = (V, E, w)$, für jedes Paar $u,v \in V$, einen kürzesten Pfad von u nach v
+		finden.
+	\end{itemize}
 
 \section*{Aufgabe 13}
     \textbf{Annahme: } Sei $P$ ein kürzester Pfad und $\exists P_{ij}$
@@ -212,8 +213,22 @@ finden.
     $|P'| = |P| - (|P_{ij}| - |P'_{ij}|)$ \\ $\Rightarrow |P'| < |P|$
     \\ $\Rightarrow P$ ist nicht kürzester Pfad $\lightning$
 
-    \end{itemize}
 
 
+\section*{Aufgabe 21}
+	\paragraph{Annahme:} $(u,v)$ ist nicht sicher bzgl. $\tilde{A}$, also $(u, v) \notin A$.
+	Konstruiere anderen überspannenden Baum $T' = (V, A', w)$ mit $\tilde{A} \cup \{(u,v)\} \subseteq A'$ wie folgt:
+	
+	Betrachte Pfad $P$ von $u$ nach $v$ in $T$. Dieser bildet zusammen mit $(u, v)$ einen Kreis.
+	Da $(u,v)$ den Schnitt $(S, V \setminus S)$ kreuzt, existiert $(x, y) \in P$ so dass $(x, y)$ den Schnitt $(S, V \setminus S)$ kreuzt.
+	Entfernt man $(x,y)$ aus $T$ und fügt $(u,v)$ ein, so erhält man den neuen überspannenden Baum $T'$
+	mit $A' = A \setminus \{(x, y)\} \cup \{(u, v)\}$.
+	Da $(u, v)$ eine Kandidatskante war, gilt $w(u,v) \leq w(x, y)$.
+	\begin{equation*}
+	w(T') = w(T) - w(x, y) + w(u,v) \leq w(T)
+	\end{equation*}
+	Da $T$ bereits ein minimaler überspannender Baum war, muss $w(T') = w(T)$ sein und $T'$ ist ein minimaler überspannender Baum.
+	$(x, y) \notin \tilde{A}$, da $\tilde{A}$ den Schnitt $(S, V \setminus S)$ respektiert, $(x, y)$ diesen aber kreuzt.
+	Also ist $\tilde{A} \subseteq A'$. $(u, v)$ sicher bzgl. $\tilde{A}$.
 
 \end{document}
