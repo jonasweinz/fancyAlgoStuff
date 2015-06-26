@@ -258,7 +258,7 @@ return T = (V, A, w);
 \section*{Aufgabe 23}
 Sei $G = (V, E, w)$ ungerichteter, gewichteter Graph mit $\forall e_1, e_2 \in E : w(e_1) \neq w(e_2)$, $T = (V, A, w)$ minimaler überspannender Baum von G. $T$ existiert, da $G$ als zusammenhängend vorausgesetzt wird.
 \paragraph{Wissen} Jeder minimale überspannende Baum $T$ von $G$ hat genau $|V|-1$ viele Kanten. Gäbe es weniger Kanten, gäbe es einen Knoten, der nicht mit dem Baum verbunden wäre, gäbe es mehr Kanten, so gäbe es einen Kreis.
-
+\paragraph{}
 Wähle eine beliebige Kante $(u, v) \in A$ und entferne diese. Damit T nun wieder ein überspannender Baum wird, muss eine geeignete Kante $(x, y) \in E \setminus \{(u,v)\}$ wieder hinzugefügt werden.
 Sei $T' = (V, A', w)$ mit $A' = A \setminus \{(u,v)\} \cup \{(x,y)\}$.
 Da alle Kanten unterschiedliche Gewichte haben, gilt $w(u,v) \neq w(x, y)$.
@@ -267,6 +267,6 @@ Da alle Kanten unterschiedliche Gewichte haben, gilt $w(u,v) \neq w(x, y)$.
 	\item Falls $w(u, v) > w(x, y)$, so ist $w(T') < w(T)$, was ein widerspruch dazu ist, dass $T$ ein minimaler überspannender Baum war.
 \end{itemize}
 
-Also existiert höchstens ein minimaler überspannender Baum $T$ von $G$.
+Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
 
 \end{document}
