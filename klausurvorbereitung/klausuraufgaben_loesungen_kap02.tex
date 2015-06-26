@@ -236,6 +236,37 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 	\end{itemize}
 	$\Rightarrow$ Annahme kann nicht zutreffen \hfill $\qed$
 
+\section*{Aufgabe 08}
+
+	\begin{enumerate}[label={\alph*}]
+
+		\item
+			\textbf{Definition reduzierter Graph}: \\
+			$G'_{red} = (V_{red},E_{red})$ mit
+			\begin{itemize}
+				\item
+					jeder Knoten $v_{i} \in V_{red}$ steht für eine
+					Zusammenhangskomponente $G'_i=(V_i,E'_i)$
+				\item
+					$(v_i,v_j) \in E_{red} \Leftrightarrow \exists u_i \in V_i,
+						u_j \in V_j: (u_i,u_j) \in E'$
+			\end{itemize}
+
+		\item
+		\textbf{Beweis} (aus dem Buch) : \\
+		(\textbf{R}) $\Rightarrow$ Für alle Knoten $v$ die während der Tiefensuche
+			auf G' mit Startknoten $u$ besucht werden gilt: $\exists$ Pfad P in G von
+			$v$ nach $u$ mit $num(w) \leq num(u) \forall w$ auf P. Dann gibt es zwei Fälle:
+			\begin{itemize}
+				\item
+					$num(u) > num(v) \Rightarrow u$ und $v$ sind in der selben Zusammenhangskomponente
+					(siehe voherige Aufgabe).
+				\item
+					$num(u) \leq num(v) \Rightarrow $ nach (\textbf{R}) wurde die Komponente
+						die $u$ enthält bereits konstruiert.
+			\end{itemize}
+
+	\end{enumerate}
 \section*{Aufgabe 12}
 
     \begin{itemize}
