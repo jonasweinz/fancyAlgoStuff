@@ -98,13 +98,13 @@ emphstyle={\color{self}\slshape},
                     \item Knoten $j = \text{Teillösungsraum} S_j
                         $ ,sodass die Kandidaten sämtlicher
                         Restriktionen auf dem Pfad von der Wurzel
-                        bis Knoten $S_j $ erfüllen. 
+                        bis Knoten $S_j $ erfüllen.
                 \end{itemize}
 
                 \item Aufz\"ahlungsmethoden: \\
                     \begin{itemize}
-                        \item Entscheidungsproblem: 
-                            \"Uberpr\"ufe, ob eine 
+                        \item Entscheidungsproblem:
+                            \"Uberpr\"ufe, ob eine
                             gegebene L\"osung das
                             Problem l\"ost
                         \item Optimierungsproblem:
@@ -114,17 +114,17 @@ emphstyle={\color{self}\slshape},
             \end{itemize}
 
         \item Ein Aufz\"ahlungsalgorithmus hei\ss t statisch, wenn der
-            Aufz\"ahlungsbaum bereits zu Beginn des Algorithmus vollst\"andig 
+            Aufz\"ahlungsbaum bereits zu Beginn des Algorithmus vollst\"andig
             vorliegt. Wird der Baum zur Laufzeit erzeugt, hei\ss t er dynamisch.
     \end{enumerate}
-    
+
 \section*{Aufgabe 02}
     \begin{enumerate}[label={\alph*)}]
-        
+
         \item
             \begin{itemize}
                 \item \textbf{Eingabe:} $G:=(V,E)$,$ k \in N$
-                \item \textbf{Ausgabe:} 
+                \item \textbf{Ausgabe:}
                     Legale Färbung von V mit $\leq$ k Farben, falls solche existiert
                 \item \textbf{Code: } \\
                 \begin{algorithm}[H]
@@ -135,7 +135,7 @@ emphstyle={\color{self}\slshape},
                     \Fn{SEARCH(i)} {
                         \While{$color(i) < k$}{
                             $color(i) += 1$\;
-                            \If{$\forall l < i : (l,i) \in E \Rightarrow 
+                            \If{$\forall l < i : (l,i) \in E \Rightarrow
                             color(l) \neq color(i)$}{
                                 \If{$i<n$}{
                                     SEARCH(i+1) \;
@@ -143,7 +143,7 @@ emphstyle={\color{self}\slshape},
                                 \Else{
                                     Gib(color(1),$\ldots$,color(n)) aus \;
                                     HALT \;
-                                
+
                                 }
                             }
                         }
@@ -152,20 +152,20 @@ emphstyle={\color{self}\slshape},
 
             \end{itemize}
 
-        
+
         \item
                 Annahme es existiert gültige Färbung des Graphen, diese wird jedoch nicht von k-Colour ausgegeben
                     \\$\Rightarrow$ k-Colour muss die maximal mögliche Anzahl an Backtracking Schritten gemacht haben (Code Zeile)
                     \\$\Rightarrow$ k-Colour hat alle konsistenten Lösungskandidaten ausprobiert.
                     Gemäß Annahme existiert eine Lösung, diese muss nach Def. konsistent sein.
                     \\$\Rightarrow$ k-colour muss sie getestet haben
-                    \\$\Rightarrow$ k-colour muss diese Ausgeben 
+                    \\$\Rightarrow$ k-colour muss diese Ausgeben
                     \\$\Rightarrow$ Widerspruch
-        
-        \item Im worst-case läuft der Algorithmus über alle möglichen 
-                    Lösungskandidaten und da es sich um Backtracking handelt 
+
+        \item Im worst-case läuft der Algorithmus über alle möglichen
+                    Lösungskandidaten und da es sich um Backtracking handelt
                     kommt man auf $O(k^n)$
-        
+
     \end{enumerate}
 
 \section*{Aufgabe 03}
@@ -180,10 +180,10 @@ emphstyle={\color{self}\slshape},
         5(2) & 1(1),3(3),4(1)\\ \hline
     \end{tabular}
 
-    
+
 \section*{Aufgabe 04}
     TODO: diese L\"osung ist nicht ganz so sch\"on!
-    
+
     \begin{python}[frame=single]
 def test(field, n, index):
     #teste Reihe und Spalte:
@@ -216,7 +216,7 @@ def printField(field,n):
         print(field[i*n:(i+1)*n])
 
 # ein Test: (die nullen muessen aufgefuellt werden)
-        
+
 testField = [4,0,0,1,0,3,0,0,3,0,1,0,2,1,0,3]
 
 print("Before:")
@@ -302,30 +302,30 @@ if __name__ == "__main__":
     for row in fQ:
         print(row)
             \end{python}
-            
+
             \item diese Teilaufgabe ist wohl trivial...
 
     \end{enumerate}
 
 
 \section*{Aufgabe 06}
-    3-SAT liegt in KNF vor, das bedeutet jede Klausel 
-    besteht aus ein bis drei Variablen. Damit die KNF. 
-    erfüllt ist muss jede dieser Klauseln erfüllt sein. 
-    Das bedeutet, dass jede Klausel mindestens eine Variable 
+    3-SAT liegt in KNF vor, das bedeutet jede Klausel
+    besteht aus ein bis drei Variablen. Damit die KNF.
+    erfüllt ist muss jede dieser Klauseln erfüllt sein.
+    Das bedeutet, dass jede Klausel mindestens eine Variable
     hat die durch ihre belegung den Wert wahr annimmt $\rightarrow$
-    Klauseln mit geringerer Anzahl von freien Variablen, die 
-    noch nicht erfüllt sind haben eine höhere Wahrscheinlichkeit 
+    Klauseln mit geringerer Anzahl von freien Variablen, die
+    noch nicht erfüllt sind haben eine höhere Wahrscheinlichkeit
     entscheidende Belegungen zu sein. Zudem bedeutet das für
-    Klauseln die schon erfüllt sind, dass die weitere Belegung 
+    Klauseln die schon erfüllt sind, dass die weitere Belegung
     ihrer Variablen nicht relevant ist.
     Daraus ergibt sich folgender Algorithmus: \\
-    
+
     \begin{tabbing}
 \quad\=\quad\=\quad\=\quad\=\\
 FülleSAT(Formel, Belegung) \\
 \>    neueFormel=betrachte noch nicht erfüllten Klauseln \\
-\>\>        sortiere Klauseln der “neueFormel” aufsteigend nach Anzahl der noch nicht \\ 
+\>\>        sortiere Klauseln der “neueFormel” aufsteigend nach Anzahl der noch nicht \\
 \>\>        belegten Variablen \\
 \>\>        gehe über alle freien Variablen und belege diese\\
 \>\>\>            ist Formel nicht falsche\\
@@ -333,15 +333,15 @@ FülleSAT(Formel, Belegung) \\
 \>\>\>            nehme Belegung zurück\\
     \end{tabbing}
 
-    
 
-    
+
+
 \section*{Aufgabe 07}
     \begin{enumerate}[label={\alph*)}]
         \item Definition Handlungsreisendenproblem: \\
             Auf einem gerichteten Graphen $G = (V,E)$ mit einer
             Kostenfunktion $c: E \rightarrow \mathbb{R}$
-            sollen alle Knoten in $V$ 
+            sollen alle Knoten in $V$
             besucht werden. Es soll die L\"osung mit minimalen Kosten
             gefunden werden.
         \item Betrachte Graph: \\
@@ -354,13 +354,13 @@ FülleSAT(Formel, Belegung) \\
             \end{figure}
             Die minimalen Kosten betragen nach s. 10 des Skripts:
             $$
-                c_0 = 0.5 \cdot \sum_{i=0}^{n-1} 
-                \left( \min\limits_{j \neq i} c(j,i) + 
+                c_0 = 0.5 \cdot \sum_{i=0}^{n-1}
+                \left( \min\limits_{j \neq i} c(j,i) +
                 \min\limits_{l \neq i} c(i,l) \right)
             $$
             Das ist in unserem Fall:
             $$
-                c_0 = \frac{1}{2} \cdot 
+                c_0 = \frac{1}{2} \cdot
                     ((2+2)+(1+1)+(1+1)+(1+1))
                     = 5
             $$
@@ -372,20 +372,20 @@ FülleSAT(Formel, Belegung) \\
                 }
             \end{figure}
             (TODO: Matrizen f\"ur jeden Iterationsschritt fehlen!)
-            
+
     \end{enumerate}
 
-    
+
 \section*{Aufgabe 08}
     Seien ${p_1, p_2, \ldots, p_n}$ die Personen, die die Br\"ucke \"uberqueren
     sollen. Die Kosten f\"ur einen Lauf zur anderen Seite der Personen seien
     $c_1, c_2, \ldots, c_n$. Sei $c_{1st}$ die Kosten der schnellsten Person
-    f\"ur einen Lauf und $c_{2nd}$ die Kosten der zweitschnellsten Person 
+    f\"ur einen Lauf und $c_{2nd}$ die Kosten der zweitschnellsten Person
     f\"ur einen Lauf. Dann k\"onnen wir die Zeit nach unten hin absch\"atzen mit:
     $$
         c_{min} = (n-1) \cdot c_{2nd} + (n-2) \cdot c_{1st}
     $$
-    (Anm: $\mathbf{(n-1) \cdot c_{2nd}}$ f\"ur die ``Hinwege'', 
+    (Anm: $\mathbf{(n-1) \cdot c_{2nd}}$ f\"ur die ``Hinwege'',
     $\mathbf{(n-2) \cdot c_{1st}}$ f\"ur die ``R\"uckwege'') \\
     Um uns die Sache einfacher zu machen, definieren wir uns einen Knoten
     im Aufz\"ahlungsbaum als Zustand und speichern daher auch alle
@@ -393,7 +393,7 @@ FülleSAT(Formel, Belegung) \\
     Die Kosten des Knotens werden durch $c(v)$ mit $v \in V$ beschrieben
     (Keine Ahnung, wie das im Skript genau definiert ist, deshalb schreibe ich
     es hier noch mal hin; Gez. Jonas).
-    Desweiteren definieren wir LS (f\"ur linke Seite) als die Start-, 
+    Desweiteren definieren wir LS (f\"ur linke Seite) als die Start-,
     und RS als die Endseite der Br\"ucke.
     Ein Knoten hat als Attribute die Mengen L (mit den Personen auf der
     linken Seite) und R (mit den Personen auf der Rechten Seite).
@@ -406,7 +406,7 @@ FülleSAT(Formel, Belegung) \\
         \item Die Person in v.R mit minimalen Kosten l\"auft mit der Lampe nach
               v'.L (wir gehen ohne Beweis davon aus, dass diese Strategie immer
               zu keinem schlechteren Resultat als andere Aktionen f\"uhren)
-        \item Zwei Personen aus v.R laufen nach v'.L 
+        \item Zwei Personen aus v.R laufen nach v'.L
     \end{itemize}
     Daraus resultieren f\"ur v' folgende Attribute:
     \begin{itemize}
@@ -416,17 +416,17 @@ FülleSAT(Formel, Belegung) \\
     Bleiben noch die Kosten f\"ur v' zu aktualisieren. Dabei sei $c_{1st_r}$ in diesem
     Kontext die Kosten der schnellsten Person aus v'.R und $c_{1st_l}$ die Kosten
     der schnellsten Person aus v'.L . Dann gilt:
-    
+
     $$
         c(v') = v + (n-v.i-1) \cdot c_{1st_l} + (n-v.i-2) \cdot c_{1st_r}
     $$
-    
+
     nun l\"asst sich das Problem mit der Kostenfunktion c(v) f\"ur jeden
     Knoten v ganz normal mit branch and bound l\"osen.
 
 
-    
-    
+
+
 \section*{Aufgabe 09}
     \begin{enumerate}[label={\alph*)}]
         \item Handlungsreisendenproblem mit Dreiecksungleichung ($\Delta HR$): \\
@@ -441,20 +441,20 @@ FülleSAT(Formel, Belegung) \\
                     \end{itemize}
 
             \end{itemize}
-            
+
             Aus Symmetrie und Dreiecksungleichung folgt: $E = V \times V
             \setminus \{ (i,i) | i \in V \} $
-            
+
             gesucht ist:
             \begin{itemize}
-                \item kürzeste Rundreise $\Leftrightarrow$ 
+                \item kürzeste Rundreise $\Leftrightarrow$
                     Permutation $\pi$ von $\left\{0,1,\ldots, n-1\right\}$ die
                     $$
                         \sum_{i=0}^{n-1} c(\pi(i), \pi(i+1 \mod n))
                     $$
                     minimiert.
             \end{itemize}
-        
+
         \item Algorithmus ``$APPROX \Delta HR$'' aus der Vorlesung (Seite 253):
             \begin{itemize}
                 \item \textbf{Eingabe:} Graph wie in \textbf{a)} beschrieben
@@ -477,31 +477,31 @@ FülleSAT(Formel, Belegung) \\
 
 
 
-            
+
     \end{enumerate}
 
-    
+
 \section*{Aufgabe 10}
-    Las-Vegas und Monte-Carlo Algorithmen sind beide 
-    probabilistische Algorithmen. Algorithmen die Zufallszahlen 
-    bzw. Zufallsentscheidungen verwenden, heißen probabilistisch 
-    oder auch randomisiert. Las-Vegas Algorithmen liefern stets 
-    eine korrekte Lösung, hingenen liefern Monte-Carlo Algorithmen 
+    Las-Vegas und Monte-Carlo Algorithmen sind beide
+    probabilistische Algorithmen. Algorithmen die Zufallszahlen
+    bzw. Zufallsentscheidungen verwenden, heißen probabilistisch
+    oder auch randomisiert. Las-Vegas Algorithmen liefern stets
+    eine korrekte Lösung, hingenen liefern Monte-Carlo Algorithmen
     manchmal inkorrekte Lösung, deren Wahrscheinlichkeit aber sehr klein ist
-    
+
 \section*{Aufgabe 11}
     \begin{enumerate}[label={\alph*)}]
         \item
-         Die Implementierung für randomisiertes Quicksort 
-         unterscheidet sich von Quicksort aus Algo 1 durch die 
-         Auswahl des Pivotelements. Dieses wird durch die Auswahl 
+         Die Implementierung für randomisiertes Quicksort
+         unterscheidet sich von Quicksort aus Algo 1 durch die
+         Auswahl des Pivotelements. Dieses wird durch die Auswahl
          einer Zufälligen Array-Stelle, der zu betrachtenen bestimmt.
          \item
-          Im worst-case ist in jedem Rekursionsschritt das Pivotelement 
-          das o.B.d.A. größte, s.d. ein Array in ein $(n-1)$-elementiges 
-          im nächsten Rekursionsschritt wird. In einem Rekursionsschritt 
-          müssen alle elemente verglichen werden $\Rightarrow$ $O(n)$ dadurch dass immer 
-          nur es ein element weniger gibt wird es $O(n)$ Rekursionsschritte 
+          Im worst-case ist in jedem Rekursionsschritt das Pivotelement
+          das o.B.d.A. größte, s.d. ein Array in ein $(n-1)$-elementiges
+          im nächsten Rekursionsschritt wird. In einem Rekursionsschritt
+          müssen alle elemente verglichen werden $\Rightarrow$ $O(n)$ dadurch dass immer
+          nur es ein element weniger gibt wird es $O(n)$ Rekursionsschritte
           geben.
           \\$\Rightarrow$ $O(n)\cdot O(n) = O(n^2)$
         \item
@@ -514,18 +514,18 @@ FülleSAT(Formel, Belegung) \\
             \item $[[[[[1] [2]] [3]] [4]] [5]] [6]$
         \end{itemize}
         \item TODO
-           
+
     \end{enumerate}
 
-    
+
 \section*{Aufgabe 12}
     TODO
-    
+
 \section*{Aufgabe 13}
     TODO
-    
-    
-    
+
+
+
 
 
 
