@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{ngerman}
 \usepackage{gensymb}
@@ -136,7 +137,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
             $\zz$: $M$ ist nicht erweiterbares Matching $\Rightarrow
             |M| \geq \frac{1}{2}|M_{max}|$
             \\
-            \textbf{Annahme:} $M$ ist nicht erweiterbares Matching und 
+            \textbf{Annahme:} $M$ ist nicht erweiterbares Matching und
             $|M| < \frac{1}{2}|M_{max}|$
             \\
             Dann muss es aber eine Kante $m_0 \in M_{max}$ geben für
@@ -148,7 +149,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
             $\Rightarrow M$ ist nicht ein nicht erweiterbares Matching
             $\lightning$ Widerspruch!
         \item
-            
+
     \end{enumerate}
 
 \section*{Aufgabe 06}
@@ -185,12 +186,54 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
    \begin{itemize}
         \item  falls $k \in L\setminus Z $: $k $ist gematched, da $Z$ eine Obermenge von $U$ ist.
         \item falls $k \in R\cap Z$: $k$ ist gematched, da ? [verstehe da gerade Wikipedias Argumentation nicht ganz]
-        
+
    \end{itemize}
     Letztendlich kann also keine Kante beide Endpunkte in $K$ haben
-    $\Rightarrow$ K ist eine Knotenüberdeckungen mit $|K| = |M|$ und $K$ muss 
+    $\Rightarrow$ K ist eine Knotenüberdeckungen mit $|K| = |M|$ und $K$ muss
     eine minimale Knotenüberdeckung sein.
-    
+
+\section*{Aufgabe 07}
+
+	$\zz$: für alle $u,v, \in V$ mit $num(u) > num(v)$ gilt:\\
+	$\exists$ Pfad $P$ von $v$ nach $u$ mit $num(w) \leq num(v) \forall w$
+	auf $P \Rightarrow u$ und $v$ sind in derselben Zusammenhangskomponente
+	\\
+	\textbf{Beweis:}\\
+	Damit $u$ und $v$ in der selben Zusammenghangskomponente sind, muss gelten:
+	\begin{enumerate}[label={\alph*.}]
+		\item
+			$\exists$ Pfad von $u$ nach $v$
+		\item
+			$\exists$Pfad von $v$ nach $u$
+	\end{enumerate}
+
+	Die zweite Bedingung ist durch die Aufgabenstellung erfüllt. Bleibt zu zeigen:
+	$\exists$ Pfad von $u$ nach $v$. \textbf{Annahme:} $\nexists$
+	Pfad von $u$ nach $v \Rightarrow$ $v$ kann kein Knoten im Teilbaum mit
+	Wurzel $u$ (im Tiefensuche Baum) sein. Betrachte den Pfad:
+	$$
+		P = [v = w_1, \ldots, w_k = u]
+	$$
+	Zudem gilt: offensichtlich kann die Tiefensuche beim Betreten des Knotens $v$
+	den Knoten $u$ noch nicht betrachtet haben (weil $num(u) > num(v)$).
+	Betrachte nun den Knoten $w_i$ (evtl. auch $w_1$), der beim Betreten von $v$ schon betrachtet
+	wurde und am nächsten zu u liegt (also den Knoten mit maximalem i,für den diese
+	Bedingung gilt). Dieses i muss kleiner $k$ sein ($w_K = u$ ist unbetrachtet).
+	Dann können folgende Fälle auftreten:
+	\begin{itemize}
+		\item $w_i$ ist nicht im Tiefensuche-Keller
+			$\Rightarrow w_i$ ist fertig abgearbeitet und wurde aus
+			dem Stack entfernt \\
+			$\Rightarrow $ alle Kindknoten von $w_i$ wurden bereits betrachtet\\
+			$\Rightarrow w_{i+1}$ wurde auch schon betrachtet.\\
+			$\Rightarrow i$ war nicht maximal gewählt $\lightning$
+		\item $w_i$ ist im Tiefensuche Keller \\
+			$\Rightarrow u$ muss in einem Teilbaum mit Wurzel $v$ sein (sonst wäre für das maximale $w_i$
+				der obere Fall eingetreten)\\
+			$\Rightarrow num(v) > num(u) \lightning$
+	\end{itemize}
+	$\Rightarrow$ Annahme kann nicht zutreffen \hfill $\qed$
+
 \section*{Aufgabe 12}
 
     \begin{itemize}
@@ -198,7 +241,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
         single-source single-sink shortest-path problem): Gegeben $G = (V, E, w)$ und zwei
         Knoten $s,t \in V$ möchte man einen kürzesten Pfad von  $s$ nach $t$ finden.
         \item Einzelquelle-kürzeste-Weg-Problem (single-source shortest-path problem):
-        Gegeben $G = (V, E, w)$ und einen (Quell-)Knoten $s \in V$ , soll für jeden Knoten $v \in V$
+        Gegeben $G = (V, E, w)$ und einen (Quell-)Knoten $s \in V$, soll für jeden Knoten $v \in V$
         ein kürzester Pfad von $s$ zu $v$ gefunden werden.
         \item Alle-Paare-kürzeste-Weg-Problem (all-pairs shortest-path problem): Hier möchte
 man, gegeben $G = (V, E, w)$, für jedes Paar $u,v \in V$, einen kürzesten Pfad von u nach v
@@ -208,11 +251,13 @@ finden.
     \textbf{Annahme: } Sei $P$ ein kürzester Pfad und $\exists P_{ij}$
     wobei $P_{ij}$ nicht der kürzeste Pfad von $v_i$ nach $v_j$ ist.
     Dann folgt trivialerweise, dass es einen kürzeren Pfad $P'_{ij}$ gibt
-    und einen Pfad $P' = v_1, \ldots, v_i, \ldots, v_j, \ldots, v_k$ mit 
+    und einen Pfad $P' = v_1, \ldots, v_i, \ldots, v_j, \ldots, v_k$ mit
     $|P'| = |P| - (|P_{ij}| - |P'_{ij}|)$ \\ $\Rightarrow |P'| < |P|$
     \\ $\Rightarrow P$ ist nicht kürzester Pfad $\lightning$
 
     \end{itemize}
+
+
 
 
 
