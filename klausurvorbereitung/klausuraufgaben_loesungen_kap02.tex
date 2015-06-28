@@ -12,6 +12,17 @@
 \usepackage{stmaryrd}
 \usepackage{listings}
 
+\usepackage[]{algorithm2e}
+
+%für pseudocode:
+\SetKwProg{Fn}{Function}{}{end}\SetKwFunction{FRecurs}{FnRecursive}%
+\SetAlgoLongEnd
+
+%für argmax:
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+
+%für folgepfeile mit begründung:
+\newcommand{\MyArrow}{\operatornamewithlimits{\Rightarrow}}
 
 %Das brauchen wir:
 \newcommand{\zz}{\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}}
@@ -238,7 +249,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 
 \section*{Aufgabe 08}
 
-	\begin{enumerate}[label={\alph*}]
+	\begin{enumerate}[label={\alph*)}]
 
 		\item
 			\textbf{Definition reduzierter Graph}: \\
@@ -247,6 +258,8 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 				\item
 					jeder Knoten $v_{i} \in V_{red}$ steht für eine
 					Zusammenhangskomponente $G'_i=(V_i,E'_i)$
+					$\Rightarrow \forall v,u \in V_{red}, v \neq u : 
+					\neg(\exists $ Pfad von $ u $ nach $v \wedge \exists $ Pfad von $v$ nach $u$ )
 				\item
 					$(v_i,v_j) \in E_{red} \Leftrightarrow \exists u_i \in V_i,
 						u_j \in V_j: (u_i,u_j) \in E'$
@@ -267,6 +280,93 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 			\end{itemize}
 
 	\end{enumerate}
+
+\section*{Aufgabe 11}
+
+	\begin{enumerate}[label={\alph*)}]
+		\item
+			$\zz: G_{szk}$ ist azyklisch\\
+			\textbf{Annahme:} $G_{szk}$ ist nicht azyklisch \\
+			$\Rightarrow \exists $ Kreis in $G_{szk}$ \\
+			$\Rightarrow \exists v_i \in V_{szk}, v_j \in V_{szk}: \exists $
+			Pfad von $v_i$ nach $v_j$ und umgekehrt in $G_{szk}$ \\
+			$\Rightarrow \forall $ Knoten $u_i$ bzw. $u_j$ die in der zur $v_i$ bzw $v_j$
+				korrespondierenden SZK sind gilt: $\exists $ Pfad von $u_i$ nach $u_j$ und
+				umgekehrt in G. \\
+			$\Rightarrow u_i $ und $u_j$ müssen sich in der selben starken zusammenhangskomponente
+			befinden \\
+			$\Rightarrow G_{szk}$ ist kein starker Zusammenhangskomponentengraph $\lightning$
+		\item
+			Vorgehensweise des algos:
+			\textbf{Eingabe: } Graph $G=(V,E)$
+			\\ \textbf{Ausgabe: } Graph $G_{szk} = (V_{szk}, E_{szk})$\\
+			\begin{algorithm}[H]
+				$V_{szk}$ := $\emptyset$\;
+				$E_{szk}$ := $\emptyset$\;
+				$V' $:= $V$\;
+				$E'$ := $\{(v,u) | (u,v) \in E \} $\;
+				$G' := (V,E')$ \;
+				führe Erledigungsorientierte Nummerierung auf $G' = (V',E')$ aus \;
+				\While{$V' \neq \emptyset$}{
+					$v' = \argmax\limits_{v'} \quad num(v') $ mit $v' \in V'$\; 
+                    $V' \setminus \{ v' \}$ \; 
+                    \textbullet erstelle neuen Knoten $v'_{szk}$ in $V_{szk}$ \;
+                    \textbullet führe DFS auf $G'$ beginndend bei $v'$ durch mit modifikationen: \\
+                    \begin{itemize}
+                        \item merke für jeden besuchten Knoten, dass er mit $v'_{szk}$ korrespondiert.
+                        \item findet DFS eine Kante zu einem Knoten $u$ mit $num(u) > num(v')$
+                            wird eine Kante $(v'_{szk}, u'_{szk})$ zu $E_{szk}$ hinzugefügt (wobei $u'_{szk}$
+                            der zu $u$ korrespondierende Knoten un $V_{szk}$ ist ). Anschließend verlasse
+                            diesen Teilbaum.
+                        \item entferne jeden besuchten Knoten v aus V' 
+                    \end{itemize}
+                    
+				}
+				return $G_{szk} =(V_{szk}, E_{szk})$
+			\end{algorithm}
+			
+            \textbf{Korrektheit:} \\
+            $\zz$ Ausgabe des Algos ist ein reduzierter Graph. \\
+           $G'$ ist erledigungsorientiert durchnummeriert. \\
+            \begin{itemize}
+                \item
+                 
+                $\MyArrow\limits_{Aufgabe 8}$ modifizierte DFS erzeugt keine
+                Kanten zu Knoten in $V{szk}$ die schon betrachtet wurden. \\
+                $\Rightarrow G_{szk} $ ist azyklisch
+                
+                \item
+                
+                $\MyArrow\limits_{Aufgabe 7}$ alle durch modifizierte DFS gefundenen Knoten $U$
+                für die gilt $num(u) < num(v')$ sind in der selben zusammenhangskomponente.
+                
+            \end{itemize}
+            
+            zusammen folgt daraus, dass der Algorithmus einen korrekten Komponentengraphen erstellt
+           
+            \item
+            \textbf{textuelle Beschreibung des Algos:}: \\
+            \begin{itemize}
+                \item jage $G$ einmal durch den Algo aus $b)$ und speichere Ergebnis in $G'$
+                \item \textbf{while} ($V' \neq \emptyset$):
+                \begin{itemize}
+                    \item \textbf{if} (\#Knoten mit Ingrad(0) $>$ 2):
+                    \begin{itemize}
+                        \item return \textbf{false}
+                    \end{itemize}
+                    \item entferne Knoten mit Ingrad(0) (und entsprechende Kanten)
+
+                \end{itemize}
+                
+                return true
+
+            \end{itemize}
+            
+            \textbf{Korrektheit:}
+            och nööö
+
+	\end{enumerate}
+
 \section*{Aufgabe 12}
 
     \begin{itemize}
