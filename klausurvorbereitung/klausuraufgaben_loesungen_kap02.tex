@@ -388,8 +388,47 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
     und einen Pfad $P' = v_1, \ldots, v_i, \ldots, v_j, \ldots, v_k$ mit
     $|P'| = |P| - (|P_{ij}| - |P'_{ij}|)$ \\ $\Rightarrow |P'| < |P|$
     \\ $\Rightarrow P$ ist nicht kürzester Pfad $\lightning$
+    
 
+\section*{Aufgabe 18}
 
+    \begin{enumerate}[label={\alph*)}]
+        \item 
+
+            \textbf{Bellman-Ford-Algo}: \\
+            \begin{algorithm}[H]
+            \For{$v \in V$}{
+                d(v) := $\infty$ \;
+                $\pi(v)$ := \textbf{NULL} \;
+            }
+            d(s) := 0 \;
+            \For{i \KwTo $|V|$ }{
+                \For{ $(u,v) \in  E$ }{
+                    \If{d(u) + w(u,v)  $<$ d(v)}{
+                        d(v) :=d(u) + w(u,v) \;
+                        $\pi(v)$ := u \;
+                    }
+                }
+            }
+            \For{$(u,v) \in E$}{
+                \If{d(u) + w(u,v) $<$ d(V)}{
+                    \#Zyklus mit negativem Gewicht \;
+                    return ERROR \;
+                }
+            }
+            
+            return \{$(v,d(v)) | v \in V$\} \;
+            \end{algorithm}
+            
+            \textbf{Komplexität:} Durch Betrachten der Schleifen offensichtlich  $O(|V| \cdot |E|)$            
+            
+        \item
+            TODO: für mich ist die Definition von $d^l(j)$ aus der Vorlesung widersprüchlich
+                $\Rightarrow $ frage im Ferientutorium.
+            
+
+    \end{enumerate}
+    
 
 \section*{Aufgabe 21}
 	\paragraph{Annahme:} $(u,v)$ ist nicht sicher bzgl. $\tilde{A}$, also $(u, v) \notin A$.
