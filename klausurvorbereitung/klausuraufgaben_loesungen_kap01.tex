@@ -262,10 +262,10 @@ printField(testField,4)
         
         \textbf{Anmerkungen: }
         \begin{itemize}
-            \item die Funktion \textit{isValisPlacement} gibt genau dann \textit{false}
+            \item die Funktion \textit{isValidPlacement} gibt genau dann \textit{false}
                 zurück, wenn sich mindestens zwei Damen gegenseitig bedrohen,
                 sonst \textit{true}
-            \item ein leeres Feld (= alle Felde sind \textit{false}) wird mit dem 
+            \item ein leeres Feld (= alle Felder sind \textit{false}) wird mit dem 
                 Aufruf \textit{fill(field, 0, n)} ``befüllt'' 
         \end{itemize}
         
@@ -350,10 +350,10 @@ FülleSAT(Formel, Belegung) \\
     f\"ur einen Lauf und $c_{2nd}$ die Kosten der zweitschnellsten Person
     f\"ur einen Lauf. Dann k\"onnen wir die Zeit nach unten hin absch\"atzen mit:
     $$
-        c_{min} = (n-1) \cdot c_{2nd} + (n-2) \cdot c_{1st}
+        c_{min} = (n-1) \cdot c_{2nd} + (n-1) \cdot c_{1st}
     $$
     (Anm: $\mathbf{(n-1) \cdot c_{2nd}}$ f\"ur die ``Hinwege'',
-    $\mathbf{(n-2) \cdot c_{1st}}$ f\"ur die ``R\"uckwege'') \\
+    $\mathbf{(n-1) \cdot c_{1st}}$ f\"ur die ``R\"uckwege'') \\
     Um uns die Sache einfacher zu machen, definieren wir uns einen Knoten
     im Aufz\"ahlungsbaum als Zustand und speichern daher auch alle
     Werte, die wir zum Aufz\"ahlen des Knotens brauchen in denselben.
@@ -366,14 +366,16 @@ FülleSAT(Formel, Belegung) \\
     linken Seite) und R (mit den Personen auf der Rechten Seite).
     Zudem definieren wir den Startzustand so, dass die schnellste Person
     zu Beginn auf der Seite RS mit der Taschenlampe steht (das erspart
-    uns eine Fallunterscheidung)
+    uns eine Fallunterscheidung, die resultierenden Kosten beinhalten dann zusätzlich
+    den Lauf der schnellsten Person von RS nach LS. Um das Problem in der ursprünglichen
+    Aufgabenstellung zu lösen müssen diese Kosten vom Endergebnis einfach abgezogen werden)
     und die Iterationstiefe i. Ein Iterationsschritt (= einer Kante von einem
     Knoten v nach v') besteht aus zwei Schritten:
     \begin{itemize}
         \item Die Person in v.R mit minimalen Kosten l\"auft mit der Lampe nach
               v'.L (wir gehen ohne Beweis davon aus, dass diese Strategie immer
               zu keinem schlechteren Resultat als andere Aktionen f\"uhren)
-        \item Zwei Personen aus v.R laufen nach v'.L
+        \item Zwei Personen aus v.L laufen nach v'.R
     \end{itemize}
     Daraus resultieren f\"ur v' folgende Attribute:
     \begin{itemize}
@@ -385,7 +387,7 @@ FülleSAT(Formel, Belegung) \\
     der schnellsten Person aus v'.L . Dann gilt:
 
     $$
-        c(v') = v + (n-v.i-1) \cdot c_{1st_l} + (n-v.i-2) \cdot c_{1st_r}
+        c(v') = v + (n-v.i-1) \cdot c_{1st_l} + (n-v.i-1) \cdot c_{1st_r}
     $$
 
     nun l\"asst sich das Problem mit der Kostenfunktion c(v) f\"ur jeden
