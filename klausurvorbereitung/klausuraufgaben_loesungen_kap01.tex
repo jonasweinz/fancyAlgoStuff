@@ -387,7 +387,7 @@ FülleSAT(Formel, Belegung) \\
     der schnellsten Person aus v'.L . Dann gilt:
 
     $$
-        c(v') = c(v) + (n-v.i-1) \cdot c_{1st_l} + (n-v.i-1) \cdot c_{1st_r}
+        c(v') = \textit{Kosten für den Pfad bis v} + (n-v.i-1) \cdot c_{1st_l} + (n-v.i-1) \cdot c_{1st_r}
     $$
 
     nun l\"asst sich das Problem mit der Kostenfunktion c(v) f\"ur jeden
