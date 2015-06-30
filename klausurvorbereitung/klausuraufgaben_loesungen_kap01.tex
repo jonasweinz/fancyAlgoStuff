@@ -180,53 +180,53 @@ emphstyle={\color{self}\slshape},
         5(2) & 1(1),3(3),4(1)\\ \hline
     \end{tabular}
 
-
 \section*{Aufgabe 04}
-    TODO: diese L\"osung ist nicht ganz so sch\"on!
 
-    \begin{python}[frame=single]
-def test(field, n, index):
-    #teste Reihe und Spalte:
-    number = field[index]
-    x = index % n
-    y = index // n
-    for i in range(n):
-        if ((field[i*n + x] == number and (i is not y))
-            or (field[y*n +i] == number and (i is not x))):
-            return False;
-    return True
-
-def fill(field,n):
-    index = 0
-    while (index < n*n and field[index] is not 0):
-        index += 1
-    if index >= n*n:
-        return True
-    for i in range(1, n+1):
-        field[index] = i
-        if test(field, n, index):
-            if fill(field, n):
-                return True
-    field[index] = 0
-    return False
+    \textbf{Algorithmus:}
+    \begin{itemize}
+        \item \textbf{Eingabe:} zu füllendes Feld \textit{field} der Größe
+            $n \times n$. unbelegte Felder sind repräsentiert mit 0 und
+            die schon belegten Felder stellen eine valide Belegung dar
+    \end{itemize}
 
 
-def printField(field,n):
-    for i in range(n):
-        print(field[i*n:(i+1)*n])
+    \begin{algorithm}[H]
+     
+        \Fn{fill(field, n)}{
+            \For{x \KwTo n}{
+                \For{y \KwTo n}{
+                    \If{field[x,y] == 0}{
+                        \For{i \KwTo n}{
+                            field[x,y] := i+1\;
+                            \If{test(field, n), x, y}{
+                                return true\;
+                            }
+                        }
+                        field[x,y] := 0\;
+                        return false\;
+                    }
+                }
+            }
+            return true\;
+        }
+        
+        \Fn{test(field, n, x, y)}{
+            number := field[x,y]\;
+            \For{i \KwTo n}{
+                \If{(field[i,y] == number and $i \neq x$) 
+                    or
+                    (field[x,i] == number and $i \neq y$)}{
+                    
+                    return false\;
+                    
+                }
+            }
+            return true\;
+        }
+        
+    \end{algorithm}
 
-# ein Test: (die nullen muessen aufgefuellt werden)
 
-testField = [4,0,0,1,0,3,0,0,3,0,1,0,2,1,0,3]
-
-print("Before:")
-printField(testField,4)
-print("After:")
-fill(testField,4)
-printField(testField,4)
-
-    \end{python}
-    
 \section*{Aufgabe 05}
 
     \begin{enumerate}[label={\alph*)}]
@@ -237,20 +237,20 @@ printField(testField,4)
          
             \Fn{fill(field, queenCounter, n)} {
                 \If{queenCounter == n} {
-                    print(field) \;
-                    return true \;
+                    print(field)\;
+                    return true\;
                 }
                 \Else{
                     \For{ x  \KwTo n}{
                         \For{y \KwTo n}{
                             \If{field[x,y] == false}{
-                                field[x,y] := true \;
+                                field[x,y] := true\;
                                 \If{isValidPlacement(field,n) } {
                                     \If{fill(field, queenCounter +1, n)}{
-                                        return true \;
+                                        return true\;
                                     }
                                 }
-                                field[x,y] = false \;
+                                field[x,y] := false\;
                             }
                         }
                     }
@@ -338,7 +338,6 @@ FülleSAT(Formel, Belegung) \\
                     \includegraphics{01_07b2.jpg}
                 }
             \end{figure}
-            (TODO: Matrizen f\"ur jeden Iterationsschritt fehlen!)
 
     \end{enumerate}
 
