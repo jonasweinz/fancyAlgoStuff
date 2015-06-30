@@ -204,16 +204,17 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
         \item[b)] $e$ hat einen ``linken'' Endpunkt in $K$
     \end{itemize}
     Für den Fall, dass $e$ gematched aber nicht in einem alternierenden Pfad ist, gilt:
-    dass $e$ nicht in einem alternierenden Pfad sein kann und in $L\setminus Z$
+    dass der linke Endpunkt nicht in einem alternierenden Pfad sein kann und in $L\setminus Z$
     enthalten ist. Für den Fall, dass $e$ nicht gematched ist und nicht in
-    einem alternierenden Pfad ist gilt: der linke Endpunkt  kann ebenfalls nicht
+    einem alternierenden Pfad ist gilt: der linke Endpunkt  kann ebenfalls nicht in
     in einem alternierenden Pfad sein (denn dieser könnte durch $e$ erweitert werden).
    \\
    Ebenso gilt: jeder Knoten $k \in K$ ist ein Endpunkt von einer gematchten
    Kante, da gilt:
    \begin{itemize}
         \item  falls $k \in L\setminus Z $: $k $ist gematched, da $Z$ eine Obermenge von $U$ ist.
-        \item falls $k \in R\cap Z$: $k$ ist gematched, da ? [verstehe da gerade Wikipedias Argumentation nicht ganz]
+        \item falls $k \in R\cap Z$: $k$ ist gematched, da k Teil eines alternierenden
+            Pfades ist (und  nicht der Endpunkt des alternierenden Pfades sein kann)
 
    \end{itemize}
     Letztendlich kann also keine Kante beide Endpunkte in $K$ haben
@@ -223,8 +224,8 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 \section*{Aufgabe 07}
 
 	$\zz$: für alle $u,v, \in V$ mit $num(u) > num(v)$ gilt:\\
-	$\exists$ Pfad $P$ von $v$ nach $u$ mit $num(w) \leq num(v) \forall w$
-	auf $P \Rightarrow u$ und $v$ sind in derselben Zusammenhangskomponente
+	$\exists$ Pfad $P$ von $v$ nach $u$ mit $num(w) \leq num(u) \forall w$
+	auf $P \Rightarrow u$ und $v$ sind in der selben Zusammenhangskomponente
 	\\
 	\textbf{Beweis:}\\
 	Damit $u$ und $v$ in der selben Zusammenghangskomponente sind, muss gelten:
@@ -232,9 +233,8 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 		\item
 			$\exists$ Pfad von $u$ nach $v$
 		\item
-			$\exists$Pfad von $v$ nach $u$
+			$\exists$ Pfad von $v$ nach $u$
 	\end{enumerate}
-
 	Die zweite Bedingung ist durch die Aufgabenstellung erfüllt. Bleibt zu zeigen:
 	$\exists$ Pfad von $u$ nach $v$. \textbf{Annahme:} $\nexists$
 	Pfad von $u$ nach $v \Rightarrow$ $v$ kann kein Knoten im Teilbaum mit
