@@ -145,7 +145,22 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
             $ e \in E \setminus M$ gibt, sodass $\{e\} \cup M$ ein gültiges
             Matching ist.
         \item
-            TODO: ``Pseudocode Carsten...''
+            \textbf{Algo:}\\
+            \begin{algorithm}[H]
+                
+                \Fn{GenM(G = (V,E))}{
+                    V' := V\;
+                    M := $\emptyset$\;
+                    \For{$e = (u,v) \in E$} {
+                        \If{$u,v \in V'$}{
+                            $M := M \cup \{ e \}$\;
+                            $V' := V' \setminus \{x,y\}$\;
+                        }
+                    }
+                }
+                
+            \end{algorithm}
+
         \item
             $\zz$: $M$ ist nicht erweiterbares Matching $\Rightarrow
             |M| \geq \frac{1}{2}|M_{max}|$
