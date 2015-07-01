@@ -199,7 +199,10 @@ emphstyle={\color{self}\slshape},
                         \For{i \KwTo n}{
                             field[x,y] := i+1\;
                             \If{test(field, n), x, y}{
-                                return true\;
+                                \If{fill(field, n}{
+                                    return true\;
+                                }
+                                
                             }
                         }
                         field[x,y] := 0\;
