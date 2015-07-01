@@ -198,8 +198,8 @@ emphstyle={\color{self}\slshape},
                     \If{field[x,y] == 0}{
                         \For{i \KwTo n}{
                             field[x,y] := i+1\;
-                            \If{test(field, n), x, y}{
-                                \If{fill(field, n}{
+                            \If{test(field, n, x, y)}{
+                                \If{fill(field, n)}{
                                     return true\;
                                 }
                                 
