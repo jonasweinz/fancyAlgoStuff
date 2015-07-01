@@ -487,14 +487,66 @@ FülleSAT(Formel, Belegung) \\
 
 
 \section*{Aufgabe 12}
-    TODO
+
+    \begin{enumerate}[label={\alph*)}]
+        \item $\zz$ RandFind korrekt: \\
+        \textbf{Beweis: } durch verallgemeinerte vollständige Induktion: \\
+        \begin{itemize}
+            \item \textbf{IA:} n = 1 $\Rightarrow x_1$ returned $\Rightarrow $ \checkmark
+            \item \textbf{IV:} $\zz$ Behauptung gilt für ein $n \in \mathbb{N}$
+            \item \textbf{IS: } $n \rightarrow n + 1$ \\
+                \begin{itemize}
+                    \item \textbf{Fall 1:} $| S_<| = k-1$ \\
+                        $\Rightarrow$ Das k. kleinste Element muss $x_i$ sein.
+                    \item \textbf{Fall 2:} $|S_>| \geq k$ \\
+                        $\Rightarrow $ das k. kleinste Element befindet sich in $S_<$\\
+                        $\Rightarrow_{IV} $ RandFind($S_<$,k ) mit $|S_<| < n$ findet gesuchtes Element.
+                    \item \textbf{Fall 3:} $|S_<| < k-1$ \\
+                        $\Rightarrow$ das k. kleinste Element befindet sich in $S_>$\\
+                        $\Rightarrow_{IV}$ RandFind($S_>$,k ) mit $|S_>| < n$ findet gesuchtes Element.
+                \end{itemize}
+
+        \end{itemize}
+        
+        \item
+            In Jedem Schritt wird die noch zu betrachtenene Menge mit dem zufällig ausgewählten
+            Element verglichen. oBdA Im worst-case wird zufällig immer das größte Element ausgesucht wobei
+            das kleinste gesucht ist. Es wird $O(n)$ Vergleich bei$ O(n)$ Rekursionsschritten geben
+            $\Rightarrow O(n)*O(n)= O(n^2)$
+            
+        \item TODO...
+    \end{enumerate}
 
 \section*{Aufgabe 13}
-    TODO
-
-
-
-
-
+    \textbf{gegeben}: $n \in \mathbb{N}$ \\
+    \textbf{Frage}: Ist n eine Primzahl? \\
+    \textbf{Bemerkung}:  Offensichtlicher Primzahltest mittels Division durch alles Primzahlen n ist für große n zu ineffizient.\\
+    \textbf{Ziel}: Entwicklung eines effizienten Monte-Carlo Algorithmus für den Primzahltest.\\
+    \textbf{Idee}:
+    \begin{itemize}
+        \item 
+            Entwicklung eines Kriteriums, dass für eine beliebige zusammengesetzte Zahl $n \in \mathbb{N} $ 
+            und $a \in \mathbb{N}$ mit $ggT(a,n)=1$, falls es zutrifft, beweist, dass $n$ zusammengesetzt ist.
+        \item
+            Beweis, dass im Fall n zusammengesetzt, höchstens ein Viertel der 
+            natürlichen Zahlen $a<n$ mit$ ggT(a,n)=1$ das Kriterium \textbf{nicht} erfüllt
+        \item
+            falls n eine Primzahl ist, dann ist das Kriterium nie erfüllt.
+            
+    \end{itemize}
+    \textbf{Textueller Algo:}\\
+        \begin{algorithm}[H]
+            wähle $a<n$\;
+            \For{t \KwTo $k \in \mathbb{N}$} {
+                \If{$ggT(a,n) \neq 1 $}{
+                    \textit{\# $n$ ist zusammengesetzt}\\
+                    return false\;
+                }
+             }
+           \textit{ \# wir haben für eine hinreichend große Anzahl (=k) das}\\
+           \textit{ \# Kriterium getestet}\\
+            return true\;
+                
+        \end{algorithm}
 
 \end{document}

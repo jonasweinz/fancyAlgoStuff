@@ -272,7 +272,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 			\begin{itemize}
 				\item
 					jeder Knoten $v_{i} \in V_{red}$ steht für eine
-					Zusammenhangskomponente $G'_i=(V_i,E'_i)$
+					Zusammenhangskomponente $G'_i=(V_i,E_i)$
 					$\Rightarrow \forall v,u \in V_{red}, v \neq u : 
 					\neg(\exists $ Pfad von $ u $ nach $v \wedge \exists $ Pfad von $v$ nach $u$ )
 				\item
@@ -321,7 +321,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 				$V' $:= $V$\;
 				$E'$ := $\{(v,u) | (u,v) \in E \} $\;
 				$G' := (V,E')$ \;
-				führe Erledigungsorientierte Nummerierung auf $G' = (V',E')$ aus \;
+				führe Erledigungsorientierte Nummerierung auf $G$ aus \;
 				\While{$V' \neq \emptyset$}{
 					$v' = \argmax\limits_{v'} \quad num(v') $ mit $v' \in V'$\; 
                     $V' \setminus \{ v' \}$ \; 
@@ -331,7 +331,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
                         \item merke für jeden besuchten Knoten, dass er mit $v'_{szk}$ korrespondiert.
                         \item findet DFS eine Kante zu einem Knoten $u$ mit $num(u) > num(v')$
                             wird eine Kante $(v'_{szk}, u'_{szk})$ zu $E_{szk}$ hinzugefügt (wobei $u'_{szk}$
-                            der zu $u$ korrespondierende Knoten un $V_{szk}$ ist ). Anschließend verlasse
+                            der zu $u$ korrespondierende Knoten in $V_{szk}$ ist ). Anschließend verlasse
                             diesen Teilbaum.
                         \item entferne jeden besuchten Knoten v aus V' 
                     \end{itemize}
@@ -426,7 +426,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
                 }
             }
             \For{$(u,v) \in E$}{
-                \If{d(u) + w(u,v) $<$ d(V)}{
+                \If{d(u) + w(u,v) $<$ d(v)}{
                     \#Zyklus mit negativem Gewicht \;
                     return ERROR \;
                 }
