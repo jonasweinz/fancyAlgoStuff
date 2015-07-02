@@ -180,6 +180,56 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 
     \end{enumerate}
 
+\section*{Aufgabe 05}
+
+    \begin{enumerate}[label={\alph*)}]
+    
+    \item \textbf{Algo:} \\
+        
+        \begin{algorithm}[H]
+        
+            \Fn{IsBipartit($G = (V,E)$)}{
+            
+                \For{$v \in V$}{
+                    $color(v ) := 0$\;
+                }
+                $V' := V$\;
+                \While{ $V' \neq \emptyset$ }{
+                    $s = $ zufälliger Knoten aus $V$\;
+                    \If{not Mod\_DFS(s,-1, $V'$)}{
+                        return false\;
+                    }
+                    
+                }
+                return true\;
+            }
+            
+            \Fn{Mod\_DFS(v, prevColor, $V'$)}{
+                $color(v) = prevColor * (-1)$\;
+                $V' \setminus \{v\}$\;
+                \For{$(v,u) \in E $}{
+                    \If{color(u) == color(v)}{
+                        return false\;
+                    }
+                    \ElseIf{color(u) == 0}{
+                        \If{not Mod\_DFS(u,color(v), $V'$)}{
+                            return false\;
+                        }
+                    }
+                }
+                return true\;
+            }
+        
+        \end{algorithm}
+        
+        
+    \item
+    
+        
+        
+    \end{enumerate}
+    
+    
 \section*{Aufgabe 06}
 
     \textbf{Beweise den Satz von König:} \\
