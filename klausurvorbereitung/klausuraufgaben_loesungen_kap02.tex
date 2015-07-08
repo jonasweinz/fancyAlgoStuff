@@ -225,7 +225,8 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
         
     \item
     
-        
+        selber Algo wie in a), nur für jede Kante einmal mit ohne diese Kante
+        \\$\Rightarrow O(|E| \cdot (|V| + |E|))$
         
     \end{enumerate}
     
@@ -345,6 +346,40 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
 			\end{itemize}
 
 	\end{enumerate}
+	
+
+\section*{Aufgabe 09}
+
+    \textbf{Textiuelle Beschreibung des Graphen:} \\
+    
+    \begin{itemize}
+        \item Führe auf Graph G Tiefensuche aus und nummeriere besuchte Knoten aufsteigend durch num(v)
+        \item transponiere Graph: $G’ := V, E’$ mit $E’ = e \in E :(w,v)$ ist$ (v,w) \in E'$
+        \item Sortiere $v \in V$ nach $n(v_i)_{max}>\ldots>num(v_j)_{min}$
+        \item Führe Tiefensuche aus, s.d. nur noch nicht betrachtete Knoten betrachtet werden
+        \item Füge alle mit dieser Tiefensuche erreichten Knoten in eine ZHK und markiere sie als betrachtet
+        \item Gehe zu nächst höchstem noch nicht betrachteten Knoten, falls noch nicht alle Knoten betrachtet
+        
+    \end{itemize}
+
+\section*{Aufgabe 10}
+
+
+    \textbf{Kante in einem Graphen löschen:}
+    \begin{itemize}
+    
+    \item Kante spielt ist kein Element einer SZK. $\rightarrow$ Anzahl ändert sich nicht
+    \item Kante ist in einem Graph von |V|,|E|=n, die auf einem Kreis liegen und so eine SZK. bestehend aus n Knoten bilden. wenn jetzt eine Kante Gelöscht wird bricht diese SZK. auf und es existieren nurnoch ein-elementige SZK. Wir haben dann n SZK. also n-1 mehr SZKs. als vorher.
+    \end{itemize}
+    
+    \textbf{Kante in einem Graphen hinzufügen:}
+    
+    \begin{itemize}
+    
+    \item Kante spielt keine Rolle, es entsteht keine veränderung der SZKs. $\rightarrow$ Anzahl ändert sich nicht.
+    \item Kante schließt eine linerare Verkettung von n Knoten von letzten auf ersten Knoten, s.d. ein Kreis entsteht, die vorher n SZKs werden zu einer $\rightarrow$ Die Anzahl verringert sich um n-1 SZKs.
+        
+    \end{itemize}
 
 \section*{Aufgabe 11}
 
@@ -455,6 +490,27 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
     \\ $\Rightarrow P$ ist nicht kürzester Pfad $\lightning$
     
 
+\section*{Aufgabe15}
+
+    TODO
+
+\section*{Aufgabe 16}
+
+    \begin{algorithm}[H]
+     
+     m := max(w) + 1 mit $0 < w < \infty$\;
+     \For{$w \in W$}{
+        $w = -w + m$\;
+     }
+     
+    \end{algorithm}
+    
+    Dann dijkstra \ldots
+
+\section*{Aufgabe 17}
+
+
+    
 \section*{Aufgabe 18}
 
     \begin{enumerate}[label={\alph*)}]
@@ -493,6 +549,8 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
             
 
     \end{enumerate}
+    
+    
     
 
 \section*{Aufgabe 21}
