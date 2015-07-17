@@ -697,7 +697,7 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
         \item \textbf{Flussnetzwerk:}\\
         Sei $G = (V,E,c,s,t) $ mit Quelle $s \in  V$, Senke $t \in V \setminus \{s\}$ und
         Kapazitätsfunktion $c : E \rightarrow \mathbb{R}^+$, die jeder Kante $ e = (v,w)$ eine
-        positive reellwertige Kapazität $c(v,w)$ zuordnet. Dann ist $G$ ein Flussnetzwerk
+        positive reellwertige Kapazität $c(v,w)$ zuordnet. Dann ist $G$ ein Flussnetzwerk.
         
         \item \textbf{Fluss:}\\
             ein Fluss $f : V \times V \rightarrow \mathbb{R}$ ist eine Funktion, die
@@ -711,6 +711,15 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
                     für alle $v \in V \setminus \{s,t\} $
             \end{enumerate}
             
+\section*{Aufgabe 26}
+
+    \textbf{Ansatz:} \\
+    Gegeben sei ein bipartiter Graph $G = (L,R,E)$ . Füge Quelle $s$ und Senke $t$
+    hinzu, und verbinde alle Knoten von L jeweils mit einer Kante mit Kantengewicht 1 mit s und
+    analog alle Knoten von R mit einer Kante mit Kantengewicht 1 mit t.
+    Gewichte zusätzlich alle Kanten in E mit 1. Dann löse das maximale Flussproblem
+    mit Quelle s und Senke t und merke Kanten zwischen L und R, die zum maximalen Fluss
+    gehören. Diese Kanten bilden ein maximales Matching.
 
     \end{itemize}
 
