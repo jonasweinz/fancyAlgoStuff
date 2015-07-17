@@ -124,16 +124,12 @@ Damit ist $P' = s, v_0, \ldots, v_k, t $ ein Pfad von $s$ nach $t$ in $G_M$.
 
 
 \section*{Aufgabe 3}
-% Zeige O(V*(V+E))
-Betrachte den in Aufgabe 2 konstruierten Graphen $G_M$.
-Die Konstruktion von $G_M$ ist in $O(|V|*(|V|+|E|))$ realisierbar.
-$A'$ und $B'$ werden in konstanter Zeit konstruiert (ggf $O(\log|V|)$, je nach Datenstruktur).
-$E'$ wird in $O(|V|*|E|)$ konstruiert, da f\"ur jede Kante in $E$ noch gepr\"uft werden muss, ob sie in $M$ liegt.
-Eine Tiefensuche auf $G_M$ dauert $O(|V|+|E|)$.
-Der gefundene Pfad hat h\"ochstens L\"ange $O(|V|)$, jede Kante kann h\"ochstens $O(\log(|V|)^2) = O(|V|)$ eingef\"ugt oder entfernt werden, falls die Kanten in Form von Nachbarschaftslisten gespeichert sind (Adjazenzmatrizen sind da irgendwo in $O(1)$).
-\begin{equation*}
-O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
-\end{equation*}
+    
+    Kurz und anschaulich: \\
+    wir haben bipartiten Graphen und führen auf jedem
+    Knoten der Seite am ``Quellknoten'' Tiefensuche aus \\
+    $\Rightarrow O(|V| \cdot (|V| + |E|))$
+    
 
 \section*{Aufgabe 4}
 
@@ -495,7 +491,7 @@ O(|V|*(|V|+|E|)) + O(|V|+|E|) + O(|V|^2) \subseteq O(|V|*(|V|+|E|))
     TODO
 
 \section*{Aufgabe 16}
-
+    
     \begin{algorithm}[H]
      
      m := max(w) + 1 mit $0 < w < \infty$\;
@@ -604,5 +600,94 @@ Da alle Kanten unterschiedliche Gewichte haben, gilt $w(u,v) \neq w(x, y)$.
 \end{itemize}
 
 Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
+
+\section*{Aufgabe 24}
+
+    okay, ich finde die Reihenfolge der Teilaufgaben leicht suboptimal,
+    deshalb kommt die b zuerst ;) \\
+    \begin{itemize}
+        \item[b)]
+            \begin{itemize}
+            \item \textbf{Algo: } Prim \\
+            \item \textbf{Eingabe: } zusammenhängender, gewichteter, ungerichteter Graph $G =(V,E,w)$ \\
+            \item \textbf{Ausgabe} minimaler überspannender Baum $T = (V,A,w)$\\
+            \item \textbf{implementierung: } \\
+            
+                \begin{algorithm}[H]
+                    
+                    $Q := V$\;
+                    $s := Q.getRandomItem()$\;
+                    $d(s) := 0$\;
+                    $\pi (s):= null$\;
+                    \For{$u \in Q \setminus \{s\}$}{
+                        $d(u) := \infty$\;
+                    }
+                    \While{$Q \neq \emtyset$}{
+                        $u := \argmin_u (d(u)), u \in Q$ \;
+                        $Q := Q \setminus \{u\}$ \;
+                        \For{$(u,v) \in E$}{
+                            \If{$v \in Q$ \textbf{and} $w(u,v) < d(v)$ } {
+                                $d(v) := w(u,v)$ \;
+                                $\pi (v) := u$ \;
+                            }
+                        }
+                    }
+                    
+                    $A := \emptyset$\;
+                    \For{$ v \in V$}{
+                        \If{$\pi (v) \neq null$}{
+                            $A.append((\pi (v), v))$\;
+                        }
+                    }
+                    
+                    \textbf{return} $T = (V,A,w)$ \;
+                
+                \end{algorithm}
+
+            
+            \end{itemize}
+            
+            \item[a)]
+                \textbf{Korrektheit:} (frei nach der englischen Wikipedia)\\
+                    Sei $G$ ein zusammenhängender gewichteter Graph.
+                    Bei jedem Schleifendurchlauf wird eine Kante gefunden, die einen
+                    Knoten, der noch nicht in $T$ liegt mit $T$ verbindet.
+                    Da $G$ zusammenhängend ist gibt es immer einen Pfad zwischen
+                    zwei beliebigen Knoten. Die Ausgabe des Algos muss ein Baum sein,
+                    da jeder Knoten max. einen Vorgänger hat und die dazu korrespondierende
+                    Kante hinzugefügt wurde.\\
+                    
+                    \textbf{Anmerkung zu folgenden Beweis: } 
+                    Die Folgepfeile dienen eher der Strukturierung des textuell geführten Beweises
+                    und sind nicht zwingend als Aussagenlogisch einwandfreie Folgerungen zu verstehen :P\\
+                    
+                    Sei nun $T_{min}$ ein minimaler Überspannder Baum von $G$.\\
+                    $\zz T = T_{min}$\\
+                    \textbf{Annahme:} $T > T_{min}$ \\
+                    Dann sei $e$ die erste Kante, die zu $T$, nicht aber zu $T_{min}$ hinzugefügt wurde,
+                    und V' sei die Menge der verbundenen Knoten, bevor $e$ hinzugefügt wurde.
+                    \\ $\Rightarrow$ Ein Endpunkt von $e$ ist in V', der andere nicht.
+                    \\ Da $T_{min}$ minimaler Spannbaum ist, muss ein Pfad darin existieren,
+                    der eben jene Endpunkte miteinander verbindet. Damit muss dieser Pfad zusätzlich
+                    eine Kante $f$ enthalten, die einen Knoten aus V' mit einem Knoten außerhalb
+                    verbindet.
+                    \\$\Rightarrow$ zum Zeitpunkt des betrachteten Iterationsschrittes
+                    hätten wir also statt $e$ auch $f$ hinzunehmen können.
+                    Da wir aber $f$ als mögliche Kante ausgeschlossen haben, muss gelten:
+                    $w(f) \geq w(e)$. \\
+                    Betrachte nun zusätzlich noch einen Baum $T_2$, der entsteht, wenn von
+                    $T_{min}$ die Kante $f$ entfernt und anschließend $e$ hinzugefügt wird.
+                    \\ $\Rightarrow T_2$ ist offensichtlich zusammenhängend, hat die selbe Knotenanzahl
+                    wie $T_{min}$ und die Summe der Kantengewichte ist nicht größer als die von $T_{min}$
+                    \\ $\Rightarrow T_2$ ist ebenfalls ein minimaler Spannbaum von $G$ und enthält
+                    $e$ sowie alle Kanten, die vor dem betrachteten Iterationsschritt schon
+                    hinzugefügt wurden. Führen wir nun den Algorithmus weiter mit diesem Teilergebnis
+                    durch, (und wiederholen induktiv diese Schritte für jede Kante) bekommen wir einen
+                    Spannbaum $T_2$ mit $T_2 = T <= T_{min} \lightning$
+                    \\
+                    Damit haben wir $T > T_{min}$ widerlegt und gezeigt, dass die Ausgabe
+                    $T$ ein minimaler Spannbaum sein muss
+            
+    \end{itemize}
 
 \end{document}
