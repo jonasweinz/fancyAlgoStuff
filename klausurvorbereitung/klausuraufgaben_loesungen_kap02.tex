@@ -622,8 +622,8 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
                     \For{$u \in Q \setminus \{s\}$}{
                         $d(u) := \infty$\;
                     }
-                    \While{$Q \neq \emtyset$}{
-                        $u := \argmin_u (d(u)), u \in Q$ \;
+                    \While{$Q \neq \emptyset$}{
+                        $u := {argmin}_u (d(u)), u \in Q$ \;
                         $Q := Q \setminus \{u\}$ \;
                         \For{$(u,v) \in E$}{
                             \If{$v \in Q$ \textbf{and} $w(u,v) < d(v)$ } {
@@ -662,7 +662,7 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
                     und sind nicht zwingend als Aussagenlogisch einwandfreie Folgerungen zu verstehen :P\\
                     
                     Sei nun $T_{min}$ ein minimaler Überspannder Baum von $G$.\\
-                    $\zz T = T_{min}$\\
+                    $\zz: \quad T = T_{min}$\\
                     \textbf{Annahme:} $T > T_{min}$ \\
                     Dann sei $e$ die erste Kante, die zu $T$, nicht aber zu $T_{min}$ hinzugefügt wurde,
                     und V' sei die Menge der verbundenen Knoten, bevor $e$ hinzugefügt wurde.
@@ -683,7 +683,7 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
                     $e$ sowie alle Kanten, die vor dem betrachteten Iterationsschritt schon
                     hinzugefügt wurden. Führen wir nun den Algorithmus weiter mit diesem Teilergebnis
                     durch, (und wiederholen induktiv diese Schritte für jede Kante) bekommen wir einen
-                    Spannbaum $T_2$ mit $T_2 = T <= T_{min} \lightning$
+                    Spannbaum $T_2$ mit $T_2 = T \leq T_{min} \lightning$
                     \\
                     Damit haben wir $T > T_{min}$ widerlegt und gezeigt, dass die Ausgabe
                     $T$ ein minimaler Spannbaum sein muss
