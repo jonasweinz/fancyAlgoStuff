@@ -690,4 +690,29 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
             
     \end{itemize}
 
+\section*{Aufgabe 25}
+
+    \begin{itemize}
+        
+        \item \textbf{Flussnetzwerk:}\\
+        Sei $G = (V,E,c,s,t) $ mit Quelle $s \in  V$, Senke $t \in V \setminus \{s\}$ und
+        Kapazitätsfunktion $c : E \rightarrow \mathbb{R}^+$, die jeder Kante $ e = (v,w)$ eine
+        positive reellwertige Kapazität $c(v,w)$ zuordnet. Dann ist $G$ ein Flussnetzwerk
+        
+        \item \textbf{Fluss:}\\
+            ein Fluss $f : V \times V \rightarrow \mathbb{R}$ ist eine Funktion, die
+            folgende Bedingung erfüllt:
+            \begin{enumerate}
+                \item \textbf{Kapazitätsbedingung:}
+                    \\ $f(v,w) \leq c(v,w) $ für alle $(v,w) \in V \times V$
+                    
+                \item \textbf{Kirchhoffsches Gesetz:}
+                    \\$\sum\limits_{e \in IN(v)} f(e) = \sum\limits_{e \in OUT(v)} f(e)$
+                    für alle $v \in V \setminus \{s,t\} $
+            \end{enumerate}
+            
+
+    \end{itemize}
+
+
 \end{document}
