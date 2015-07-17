@@ -715,9 +715,11 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
 
     \textbf{Ansatz:} \\
     Gegeben sei ein bipartiter Graph $G = (L,R,E)$ . Füge Quelle $s$ und Senke $t$
-    hinzu, und verbinde alle Knoten von L jeweils mit einer Kante mit Kantengewicht 1 mit s und
-    analog alle Knoten von R mit einer Kante mit Kantengewicht 1 mit t.
-    Gewichte zusätzlich alle Kanten in E mit 1. Dann löse das maximale Flussproblem
+    hinzu, und verbinde alle Knoten von L jeweils mit einer Kante mit Kantengewicht 1 mit s
+    (gerichtet von s nach $l \in L$)und
+    analog alle Knoten von R mit einer Kante mit Kantengewicht 1 mit t (gerichtet von $r \in R$ nach t).
+    Gewichte zusätzlich alle Kanten in E mit 1 und richte sie aus, sodass alle
+    Kanten in E die Form haben: $ (l,r), l\in L, r \in R$. Dann löse das maximale Flussproblem
     mit Quelle s und Senke t und merke Kanten zwischen L und R, die zum maximalen Fluss
     gehören. Diese Kanten bilden ein maximales Matching.
 
