@@ -730,14 +730,94 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
 \section*{Aufgabe 27}
 
     Folgender Graph widerlegt beides:
-    
-     \begin{figure}[H]
+     \begin{figure}[!htb]
         \centering
-        \def\svgwidth{\columnwidth}
-        \resizebox{0.5\textwidth}{!}{
+        \resizebox{0.8\textwidth}{!}{
             \includegraphics{02_27.jpg}
         }
     \end{figure}
+    
+\section*{Aufgabe 28}
+
+TODO: buch...
+
+\section*{Aufgabe 29}
+
+    \begin{enumerate}[label={\alph*)}]
+        \item \textbf{Max-Flow Min-Cut Theorem:}
+            \\ Sei $G=(V,E,c,s,t)$ ein Flussnetzwerk, dann ist der maximale Flusswert in G gleich dem
+                minimum der Kapazitäten der s und t separierenden Schnitte. Formal:
+                $$
+                    \max\{|f| \: |\: f \: \text{ist Fluss in G} \} = \min\{c(S,V \setminus S)\: |\: (S,V \setminus S) \:\text{ist s,t-separierend} \}
+                $$
+        \item TODO
+        \item TODO
+  
+    \end{enumerate}
+
+\section*{Aufgabe 30}
+
+Wir benötigen noch zusätzlich folgende Definition:
+\\ \textbf{Residualgraph: } ein Residualgraph $G_r = (V, E_r)$ von $G$ enthält alle
+    Kanten aus $E$ die nicht von f vollständig ausgelastet sind, sowie entsprechende Rückkanten,
+    die ``den nicht genutzten Fluss zurückleiten''. Formal bedeutet dies:
+    $$
+        E_r = \{(v,w) | (v,w) \in E \wedge f((v,w)) < u((v,w))\} \cup \{ (w,v) | (v,w) \in E  \wedge f((v,w)) > 0  \}
+    $$
+    mit $u_r(e_r), e_r \in E_r$ bezeichnet die Restkapazität einer Kante $e$ wenn $e \in E$,
+    bzw. die vom Fluss genutzte Kapazität, wenn $e_r$ eine rückwärtsgerichtete
+    Kante zu einer Kante $e \in E$ ist
+    Formal:
+    $$
+        u_r(e_r) :=  \begin{cases}
+                            u(e_r ) - f(e_r)  & wenn \: e_r \in E \\
+                            f(e_r) & wenn \: e_r^{\leftarrow} \in E
+                          \end{cases} 
+    $$
+    mit $e^{\leftarrow}$ ist Rückwärtskante zu $e$ \\
+    
+    Der Ford-Fulkerson Algorithmus sucht jetzt quasi nach dem kürzesten Weg
+    von s nach t im Residualgraph zu einem Flussnetzwerk G um so 
+    den maximalen Fluss in G zu finden.
+    \begin{itemize}
+        \item \textbf{Eingabe: } Flussnetzwerk $G = (V,E, u,s,t)$
+        \item \textbf{Ausgabe: Maximaler Fluss in G} 
+        \item \textbf{Methode: } \\
+            \begin{algorithm}[H]
+                $f(e) := 0$ für alle $e \in E$\;
+                \While{$\exists $ Pfad von s nach t in $G_r$}{
+                    P := beliebiger Pfad von s nach t in $G_r$\;
+                    $\gamma = \min\{u_r(e) | e \in P\}$\;
+                    \For{$e \in P \cap E$}{
+                        $f(e) := f(e) + \gamma$\;
+                    }
+                    \For{$e^{\leftarrow} \in P \setminus E$}{
+                        $e := (e^{\leftarrow})^{\leftarrow}$\;
+                        $f(e) := f(e) - \gamma$\;
+                    }
+                }
+            \end{algorithm}
+           (\textbf{Anmerkung:} $G_r$ wird implizit aktualisiert)
+
+
+    \end{itemize}
+    
+\section*{Aufgabe 31}
+
+    \begin{enumerate}[label={\alph*)}]
+        \item 
+            sei n die Summe r Kantenkapaziten in einem Flussnetwerk.
+            Dann terminiert Ford-Fulkerson nach maximal n durchläufen.
+        \item
+    \end{enumerate}
+
+
+\section*{Aufgabe 32}
+
+    \begin{enumerate}[label={\alph*)}]
+        \item \textbf{Algo von Dinic:} \\
+            
+    \end{enumerate}
 
 
 \end{document}
