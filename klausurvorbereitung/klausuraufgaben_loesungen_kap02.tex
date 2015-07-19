@@ -687,7 +687,11 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
                     Spannbaum $T_2$ mit $T_2 = T \leq T_{min} \lightning$
                     \\
                     Damit haben wir $T > T_{min}$ widerlegt und gezeigt, dass die Ausgabe
-                    $T$ ein minimaler Spannbaum sein muss
+                    $T$ ein minimaler Spannbaum sein muss\\
+                    
+                    \textbf{Laufzeit: } \\
+                    
+                    
             
     \end{itemize}
 
@@ -739,8 +743,20 @@ Also existiert genau ein minimaler überspannender Baum $T$ von $G$.
     
 \section*{Aufgabe 28}
 
-TODO: buch...
+Aus dem Buch:\\
 
+     \begin{figure}[!htb]
+        \centering
+        \resizebox{0.5\textwidth}{!}{
+            \includegraphics{02_28-1.png}
+        }
+    \end{figure}
+     \begin{figure}[!htb]
+        \centering
+        \resizebox{0.5\textwidth}{!}{
+            \includegraphics{02_28-2.png}
+        }
+    \end{figure}
 \section*{Aufgabe 29}
 
     \begin{enumerate}[label={\alph*)}]
@@ -806,9 +822,13 @@ Wir benötigen noch zusätzlich folgende Definition:
 
     \begin{enumerate}[label={\alph*)}]
         \item 
-            sei n die Summe r Kantenkapaziten in einem Flussnetwerk.
+            sei n die Summe derr Kantenkapaziten in einem Flussnetwerk.
             Dann terminiert Ford-Fulkerson nach maximal n durchläufen.
         \item
+            Alle Kapazitäten sind ganzzahlig und wir starten mit dem Nullfluss. \\
+            $\Rightarrow |f|$ ist bei jedem Iterationsschritt Ganzzahlig.
+            Ein Iterationsschritt erhöht zudem die Größe des Flusses mindestens um 1\\
+            $\Rightarrow F_{max} \leq \sum_{(x,y) \in E} c(x,y) = n$
     \end{enumerate}
 
 
@@ -816,6 +836,74 @@ Wir benötigen noch zusätzlich folgende Definition:
 
     \begin{enumerate}[label={\alph*)}]
         \item \textbf{Algo von Dinic:} \\
+            Sei im Folgenden:
+            \begin{itemize}
+                \item $G = (V,E,c,s,t)$ ein Flussnetzwerk
+                \item $G_r$ der Residualgraph zu G
+                \item $G_s$ der Schichtgraph (= Graph mit Kanten die zum kürzesten Pfad in $G_r$
+                    von s zu jedem beliebigen Knoten gehören)
+                \item Sperrfluss: ein Fluss in $G_s$, der in jedem s-t Weg mindestens eine Kante auslastet
+                
+            \end{itemize}
+            
+            Dann ergibt sich folgender Ablauf für den Algorithmus von Dinic:
+            \begin{enumerate}[label={\arabic*. }]
+                \item $f(e) := 0$ für alle $e \in E$
+                \item bestimme Schichtgraphen $G_s$
+                \item bestimme Sperrfluss g in $G_s$
+                \item g ist Nullfluss: wir sind fertig.
+                \item sonst: augmentiere f entlang g: d.H. für alle $e \in E$ gilt:
+                $$
+                    f(e) := f(e) + g(e) - g(e^{\leftarrow}) , \text{mit }\: g(e) = 0 \: \text{falls} \:
+                    e \notin E_s
+                $$
+                \item goto 2.
+            \end{enumerate}
+            
+        \item Erstelle Schichtgraph:
+            führe Breitensuche auf $G_r$ aus (O(|E|))
+        \item Sperrfluss finden:
+            \begin{enumerate}[label={\arabic*.}]
+                \item setze g(e) := 0 für alle $e \in G_s$
+                \item $H := G_s$
+                \item START: \\
+                    \begin{itemize}
+                        \item erstelle Pfad $P := \{s\}$
+                        \item v := s
+                        \item goto VOR
+                    \end{itemize}
+                \item VOR: \\
+                    \begin{itemize}
+                        \item falls keine Kante in H v verlässt: goto ZURÜCK
+                        \item wähle Kante (v,w) aus H und erweitere P um w
+                        \item v := w
+                        \item falls $v \neq t$ goto VOR
+                        \item falls v = t goto AUGMENTIEREN
+                    \end{itemize}
+                \item AUGMENTIEREN: \\
+                    \begin{itemize}
+                        \item augmentiere g um P soweit es geht:\\
+                            setze $\gamma = \min\limits_{e\in P} u_r(e)$,\\
+                            setze $g(e) += \gamma$ für alle $ e \in P$
+                        \item entferne jetzt ausgelastete Kanten aus H
+                        \item goto START
+                    \end{itemize}
+
+                \item ZURÜCK: \\
+                    \begin{itemize}
+                        \item falls v=s ist g Sperrfluss, also STOP
+                        \item (u,v) letzte Kante auf P
+                        \item $P \ (u,v)$
+                        \item entferne v und alle alle mit ihm inzidenten Kanten aus H
+                        \item v := u
+                        \item goto VOR
+                    \end{itemize}
+
+
+
+            \end{enumerate}
+
+        \item 
             
     \end{enumerate}
 
